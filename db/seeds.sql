@@ -1,3 +1,4 @@
+-- Work Reference: RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/28-Stu_Mini-Project
 INSERT INTO movies (movie_name)
 VALUES ("Lion King"),
        ("The Godfather"),

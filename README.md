@@ -65,6 +65,12 @@ Fulfilling any of the following can add up to 20 points to your grade. Note that
 
 * Application allows users to view the total utilized budget of a department&mdash;in other words, the combined salaries of all employees in that department (8 points).
 
+## Work References
+* Week 10 OOP-Team-Roster Assignment for working prompts(i.e., functioning Inquirer)
+* RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/28-Stu_Mini-Project for mySQL
+* My brilliant study buddies, instructor, TA and tutor 
+
+
 ## User Story
 
 ```md
@@ -80,7 +86,7 @@ GIVEN a functioning inquirer
 WHEN I start the application
 THEN I am able to choose from (1) view all departments (2) view all roles (3) view all employees (4) add department (5) add role (6) add employee (7) update to revise any outdated employee information
 WHEN I choose "view all departments" 
-THEN I am have a table with 2 columns - (1) department names (2) department ids
+THEN I have a table with 2 columns - (1) department names (2) department ids
 WHEN I choose "view all roles"
 THEN I have a table with 4 columns -  (1) job title (2) role id (3) department (4) salary
 WHEN I choose "view all employees"

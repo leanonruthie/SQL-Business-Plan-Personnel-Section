@@ -1,6 +1,7 @@
-// RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/28-Stu_Mini-Project
+// Work Reference: RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/28-Stu_Mini-Project
 
 const express = require('express');
+
 // Import and require mysql2
 const mysql = require('mysql2');
 
