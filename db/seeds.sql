@@ -1,17 +1,22 @@
--- Work Reference: RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/28-Stu_Mini-Project
-INSERT INTO movies (movie_name)
-VALUES ("Lion King"),
-       ("The Godfather"),
-       ("West Side Story"),
-       ("Parasite"),
-       ("The Wizard of Oz");
+INSERT INTO department (department)
+VALUES ("Backend Engineering"),
+    ("Customer Service"),
+    ("Data Science"),
+    ("DevOps Engineering"),
+    ("Human Resources"),
+    ("Legal"),
+    ("Marketing"),
+    ("Sales"),
+    ("User Experience");
 
-INSERT INTO reviews (movie_id, review)
-VALUES (1, "Zazu is underrated. Give that hornbill a sequel!"),
-       (2, "I'm gonna make him an offer you can't refuse, watch this movie"),
-       (1, "Scar is the lion everyone loves to hate"),
-       (3, "Ten years of ballet and three years of tap to join a gang in this neighborhood"),
-       (5, "The tin man gave a metallic, hollow performance"),
-       (1, "Hakuna matata"),
-       (5, "Those flying monkeys are nightmare fuel!");
+INSERT INTO position (position, salary, department)
+VALUES ("Backend Senior Engineer", 150000.00, 1),
+    ("Service Representative", 50000.00, 2),
+    ("Data Scientist", 95000.00, 3),
+    ("DevOps Senior Engineer", 100000.00, 4),
+    ("Hiring Manager", 70000.00, 5),
+    ("Senior Associate", 90000.00, 6),
+    ("Marketing Manager", 85000.00, 7),
+    ("Sales Representative", 75000.00, 8),
+    ("UX Designer", 80000.00, 9);
        

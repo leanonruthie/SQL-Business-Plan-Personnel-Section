@@ -1,20 +1,19 @@
--- Work Reference: RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/28-Stu_Mini-Project
+DROP DATABASE IF EXISTS company_db;
+CREATE DATABASE company_db;
 
-DROP DATABASE IF EXISTS movies_db;
-CREATE DATABASE movies_db;
+USE company_db;
 
-USE movies_db;
-
-CREATE TABLE movies (
+CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  movie_name VARCHAR(100) NOT NULL
+  department VARCHAR(30)
 );
 
-CREATE TABLE reviews (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    movie_id INT,
-    review TEXT NOT NULL,
-    FOREIGN KEY (movie_id)
-    REFERENCES movies(id)
-    ON DELETE SET NULL
+CREATE TABLE position (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  position VARCHAR(100),
+  salary DECIMAL (19,2),
+  department INT,
+  FOREIGN KEY (department)
+  REFERENCES department(id)
+  ON DELETE SET NULL
 );

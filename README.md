@@ -67,8 +67,8 @@ Fulfilling any of the following can add up to 20 points to your grade. Note that
 
 ## Work References
 * Week 10 OOP-Team-Roster Assignment for working prompts(i.e., functioning Inquirer)
-* RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/28-Stu_Mini-Project for mySQL
-* My brilliant study buddies, instructor, TA and tutor 
+* RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/ for working mySQL (i.e., schema.sql, query.sql, query.sql)
+* My brilliant study buddies, instructor, TA and tutor for integration
 
 
 ## User Story
