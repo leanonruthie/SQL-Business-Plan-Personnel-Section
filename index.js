@@ -1,5 +1,6 @@
 // Work Reference - OOP-Team-Roster Assignment for Week 10
-
+// How will I push results from inquirer directly to database?
+// How will the existing db render proper tables upon selection from promptOptions()?
 const inquirer = require('inquirer');
 const fs = require('fs');
 

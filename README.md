@@ -34,6 +34,8 @@ THEN I enter his/her/ther’s first name, last name, position, and manager and t
 WHEN I choose to update outdated employee position information
 THEN I am prompted to select one of the positions and table/database is updated
 ```
+## Screenshots
+[tbd]
 
 ## Github Repository
 <a href="https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git">https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git</a>
