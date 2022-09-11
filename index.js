@@ -10,7 +10,7 @@ function promptOptions() {
             type: 'list',
             name: 'options',
             message: 'Please select ONE:',
-            choices: ['View All Departments', 'View All Employees', 'View all Roles', 'Add a Department', 'Add an Employee', 'Add a Role', 'Update Role', 'Exit']
+            choices: ['View All Departments', 'View All Employees', 'View all Positions', 'Add a Department', 'Add an Employee', 'Add a Position', 'Update Position', 'Exit']
         }
     ])
         .then((answers) => {
@@ -18,15 +18,15 @@ function promptOptions() {
                 promptDepts();
             } else if (answers.choice == "View All Employees") {
                 promptEmpls();
-            } else if (answers.choice == "View all Roles") {
-                promptRoles();
+            } else if (answers.choice == "View all Positions") {
+                promptPositions();
             } else if (answers.choice == "Add a Department") {
                 promptAddDept();
             } else if (answers.choice == "Add an Employee") {
                 promptAddEmpl();
-            } else if (answers.choice == "Add a Role") {
-                promptAddRole();
-            } else if (answers.choice == "Update Role") {
+            } else if (answers.choice == "Add a Position") {
+                promptAddPosition();
+            } else if (answers.choice == "Update Position") {
                 promptUpdate();
             }
             else {
@@ -47,9 +47,9 @@ function promptEmpls() {
     promptOptions()
 }
 
-// 3. View all Roles
-function promptRoles() {
-    // MUST RENDER ROLE TABLE
+// 3. View all Positions
+function promptPositions() {
+    // MUST RENDER POSITION TABLE
     promptOptions()
 }
 
@@ -83,8 +83,8 @@ function promptAddEmpl() {
         },
         {
             type: 'list',
-            name: 'role',
-            message: 'What will be his/her/their new role?',
+            name: 'position',
+            message: 'What will be his/her/their new position?',
             choices: []
         },
         {
@@ -100,23 +100,23 @@ function promptAddEmpl() {
         });
 }
 
-// 6. Add a Role
-function promptAddRole() {
+// 6. Add a Position
+function promptAddPosition() {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'role',
-            message: 'What is the name of the new role?'
+            name: 'newPosition',
+            message: 'What is the name of the new position?'
         },
         {
             type: 'input',
-            name: 'salary',
-            message: 'What is salary of the new role?'
+            name: 'newPositionSalary',
+            message: 'What is salary of the new position?'
         },
         {
             type: 'list',
-            name: 'role',
-            message: 'Which department will the new role be in?',
+            name: 'newPositionDept',
+            message: 'Which department will the new position be in?',
             confirm: []
         },
     ])
@@ -131,14 +131,14 @@ function promptUpdate() {
     return inquirer.prompt([
         {
             type: 'list',
-            name: 'emplUpdate',
+            name: 'emplUpdated',
             message: 'Whose information would you like to update?',
             choices: []
         },
         {
             type: 'list',
-            name: 'updateRole',
-            message: 'Which new role will the employee fulfill?',
+            name: 'updatePosition',
+            message: 'Which new position will the employee fulfill?',
             confirm: []
         },
     ])

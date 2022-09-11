@@ -9,6 +9,18 @@ VALUES ("Backend Engineering"),
     ("Sales"),
     ("User Experience");
 
+-- NOT WORKING
+-- INSERT INTO position (first_name, last_name, position, salary, department, manager)
+-- VALUES ("Keanu","Reeves", 1, 1, 1, "Manager1"),
+--     ("Stephanie","Courtney", 2, 2, 2, "Manager2"),
+--     ("Elon","Musk", 3, 3, 3, "Manager3"),
+--     ("Dave","Chappelle", 4, 4, 4, "Manager4"),
+--     ("Bethenny","Frankel", 5, 5, 5, "Manager5"),
+--     ("Jermaine","Cole", 6, 6, 6, "Manager6"),
+--     ("Oprah","Winfrey", 7, 7, 7, "Manager7"),
+--     ("Kim","Ruth", 8, 8, 8, "Manager8"),
+--     ("Doja","Cat", 9, 9, 9, "Manager9");
+
 INSERT INTO position (position, salary, department)
 VALUES ("Backend Senior Engineer", 150000.00, 1),
     ("Service Representative", 50000.00, 2),
