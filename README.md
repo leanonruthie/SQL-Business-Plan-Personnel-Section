@@ -97,8 +97,8 @@ WHEN I choose to "add role"
 THEN I enter its name, salary, and department and table/database is updated
 WHEN I choose "add employee"
 THEN I enter his/her/ther’s first name, last name, role, and manager and table/database is updated
-WHEN I choose to update outdated employee information
-THEN I am prompted to select an employee for any further revision and table/database is updated
+WHEN I choose to update outdated employee role information
+THEN I am prompted to select one of the roles and table/database is updated
 ```
 
 ## Github Repository

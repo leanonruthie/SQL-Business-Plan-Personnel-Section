@@ -3,23 +3,14 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// 1. View All Departments
-// 2. View All Employees
-// 3. View all Roles
-// 4. Add a Department
-// 5. Add an Employee
-// 6. Add a Role
-// 7. Update Info
-// 8. Exit
-
+// Choose one of many options
 function promptOptions() {
     inquirer.prompt([
         {
             type: 'list',
             name: 'options',
             message: 'Please select ONE:',
-            choices: ['View All Departments', 'View All Employees', 'View all Roles', 'Add a Department', 'Add an Employee', 'Add a Role',
-                'Update Info', 'Exit']
+            choices: ['View All Departments', 'View All Employees', 'View all Roles', 'Add a Department', 'Add an Employee', 'Add a Role', 'Update Role', 'Exit']
         }
     ])
         .then((answers) => {
@@ -35,17 +26,35 @@ function promptOptions() {
                 promptAddEmpl();
             } else if (answers.choice == "Add a Role") {
                 promptAddRole();
-            } else {
-                // MUST MODIFY THIS SECTION
-                const htmlPageContent = generateMarkdown(employees);
-                fs.writeFile('./dist/index.html', htmlPageContent, (err) =>
-                    err ? console.log(err) : console.log('Successfully created dist/index.html!')
-                );
-            };
+            } else if (answers.choice == "Update Role") {
+                promptUpdate();
+            }
+            else {
+                // MUST COMPLETE THIS SECTION
+            }
         });
 }
 
+// 1. View All Departments
 function promptDepts() {
+    // MUST RENDER DEPARTMENT TABLE
+    promptOptions()
+}
+
+// 2. View All Employees
+function promptEmpls() {
+    // MUST RENDER EMPLOYEE TABLE
+    promptOptions()
+}
+
+// 3. View all Roles
+function promptRoles() {
+    // MUST RENDER ROLE TABLE
+    promptOptions()
+}
+
+// 4. Add a Department
+function promptAddDept() {
     return inquirer.prompt([
         {
             type: 'input',
@@ -54,14 +63,13 @@ function promptDepts() {
         },
     ])
         .then((answers) => {
-            // MUST MODIFY THIS SECTION
-            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-            employees.push(engineer);
+            // MUST UPDATE DEPARTMENT DATABASE
             promptOptions();
         });
 }
 
-function promptEmpls() {
+// 5. Add an Employee
+function promptAddEmpl() {
     return inquirer.prompt([
         {
             type: 'input',
@@ -77,31 +85,65 @@ function promptEmpls() {
             type: 'list',
             name: 'role',
             message: 'What will be his/her/their new role?',
-            choices:
-
+            choices: []
         },
         {
             type: 'list',
             name: 'manager',
-            message: 'What will be his/her/their new role?',
-            choices:
+            message: 'Who is his/her/their manager?',
+            choices: []
         },
     ])
         .then((answers) => {
             // MUST MODIFY THIS SECTION
-            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-            employees.push(engineer);
             promptOptions();
         });
 }
-;
 
-promptRoles();
+// 6. Add a Role
+function promptAddRole() {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'role',
+            message: 'What is the name of the new role?'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'What is salary of the new role?'
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: 'Which department will the new role be in?',
+            confirm: []
+        },
+    ])
+        .then((answers) => {
+            // MUST MODIFY THIS SECTION
+            promptOptions();
+        });
+}
 
-promptAddDept();
-
-promptAddEmpl();
-
-promptAddRole();
-
-promptOptions();
+// 7. Update Info
+function promptUpdate() {
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'emplUpdate',
+            message: 'Whose information would you like to update?',
+            choices: []
+        },
+        {
+            type: 'list',
+            name: 'updateRole',
+            message: 'Which new role will the employee fulfill?',
+            confirm: []
+        },
+    ])
+        .then((answers) => {
+            // MUST MODIFY THIS SECTION
+            promptOptions();
+        });
+}
