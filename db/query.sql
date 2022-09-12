@@ -9,6 +9,9 @@ SELECT employees.id AS id,
 employees.first_name AS first_name,
 employees.last_name AS last_name,
 employees.manager AS manager,
-positions.position_name AS position_name
+positions.position_name AS position_name,
+positions.salary AS salary,
+positions.department_id AS department_id
 FROM employees
-JOIN positions ON employees.position_id = positions.id; 
+JOIN positions ON employees.position_id = positions.id;
+
