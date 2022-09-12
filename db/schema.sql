@@ -3,14 +3,26 @@ CREATE DATABASE company_db;
 
 USE company_db;
 
-CREATE TABLE position (
+CREATE TABLE departments (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  position VARCHAR(100),
-  salary DECIMAL (19,2),
-  department VARCHAR(30)
+  department_name VARCHAR(30)
 );
 
-CREATE TABLE department (
+CREATE TABLE positions (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  department VARCHAR(30)
+  position_name VARCHAR(100),
+  salary DECIMAL (19,2),
+  department_id INT,
+  FOREIGN KEY (department_id)
+  REFERENCES departments(id)
+);
+
+CREATE TABLE employees (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(30),
+  last_name VARCHAR(30),
+  manager VARCHAR(100),
+  position_id INT,
+  FOREIGN KEY (position_id)
+  REFERENCES positions(id)
 );
