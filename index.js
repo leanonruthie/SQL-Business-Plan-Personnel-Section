@@ -1,15 +1,13 @@
 // Work Reference #1 - a reminder to create proper inquirer prompts using my own homework assignment - OOP-Team-Roster Assignment - for Week 10
 
-const mysql = require('mysql2'); 
 const fs = require('fs');
-const renderTable = require('console.table')
 const inquirer = require('inquirer');
 // Work reference #2 -RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/12-Stu_Connect-Node - See connection.js for below const
-const db = require('./db/connection.js');
+const db = require('./db/connection');
 
-const myEmpls=[];
+const myEmpls = [];
 
- // initializing inquirer prompt 
+// initializing inquirer prompt 
 promptOptions()
 
 // Choose one of many options
@@ -63,7 +61,7 @@ function promptOptions() {
 function promptDepts() {
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
-});
+    });
     promptOptions()
 }
 
@@ -72,7 +70,7 @@ function promptEmpls() {
     // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
-});
+    });
     promptOptions()
 }
 
@@ -81,7 +79,7 @@ function promptPositions() {
     // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
-});
+    });
     promptOptions()
 }
 
@@ -90,7 +88,7 @@ function promptEmplsDept() {
     // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
-});
+    });
     promptOptions()
 }
 
@@ -99,7 +97,7 @@ function promptEmplsMngr() {
     // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
-});
+    });
     promptOptions()
 }
 
@@ -115,7 +113,7 @@ function promptAddDept() {
         .then((answers) => {
             // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
             const deptName = new deptName(answers.deptName);
-            employees.push(deptName);
+            myEmpls.push(deptName);
             promptOptions();
         });
 }
@@ -149,7 +147,7 @@ function promptAddEmpl() {
         .then((answers) => {
             // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
             const deptName = new deptName(answers.deptName);
-            employees.push(deptName);
+            myEmpls.push(deptName);
             promptOptions();
         });
 }
@@ -177,7 +175,7 @@ function promptAddPosition() {
         .then((answers) => {
             // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
             const deptName = new deptName(answers.deptName);
-            employees.push(deptName);
+            myEmpls.push(deptName);
             promptOptions();
         });
 }
@@ -199,7 +197,9 @@ function promptEmplUpdate() {
         },
     ])
         .then((answers) => {
-            // MUST MODIFY THIS SECTION
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            myEmpls.push(deptName);
             promptOptions();
         });
 }
@@ -221,10 +221,10 @@ function promptMngrUpdate() {
         },
     ])
         .then((answers) => {
-           // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-           const deptName = new deptName(answers.deptName);
-           employees.push(deptName);
-           promptOptions();
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            myEmpls.push(deptName);
+            promptOptions();
         });
 }
 
@@ -241,7 +241,7 @@ function promptdltDept() {
         .then((answers) => {
             // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
             const deptName = new deptName(answers.deptName);
-            employees.push(deptName);
+            myEmpls.push(deptName);
             promptOptions();
         });
 }
@@ -259,7 +259,7 @@ function promptdltEmpl() {
         .then((answers) => {
             // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
             const deptName = new deptName(answers.deptName);
-            employees.push(deptName);
+            myEmpls.push(deptName);
             promptOptions();
         });
 }
@@ -275,12 +275,12 @@ function promptdltPosition() {
             choices: []
         }
     ])
-        .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            employees.push(deptName);
-            promptOptions();
-        });
+    .then((answers) => {
+        // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+        const deptName = new deptName(answers.deptName);
+        myEmpls.push(deptName);
+        promptOptions();
+    });
 }
 
 // 14. Exit or restart is already in else statement in initial prompt
