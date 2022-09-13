@@ -30,9 +30,9 @@ function promptOptions() {
             } else if (answers.choice == "View all Positions") {
                 promptPositions();
             } else if (answers.choice == "View All Employees by Their Department") {
-                promptPositions();
+                promptEmplsDept();
             } else if (answers.choice == "View All Employees by Their Manager") {
-                promptPositions();
+                promptEmplsMngr();
             } else if (answers.choice == "Add a Department") {
                 promptAddDept();
             } else if (answers.choice == "Add an Employee") {
@@ -61,41 +61,45 @@ function promptOptions() {
 
 // 1. View All Departments
 function promptDepts() {
-    db.query('SELECT * FROM employees', function (err, results) {
-        console.table(results);
+    db.query('SELECT * FROM departments', function (err, data) {
+        console.table(data);
 });
     promptOptions()
 }
 
 // 2. View All Employees
 function promptEmpls() {
-    db.query('SELECT * FROM employees', function (err, results) {
-        console.table(results);
-    });
+    // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
+    db.query('SELECT * FROM departments', function (err, data) {
+        console.table(data);
+});
     promptOptions()
 }
 
 // 3. View all Positions
 function promptPositions() {
-    db.query('SELECT * FROM positions', function (err, results) {
-        console.table(results);
-    });
+    // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
+    db.query('SELECT * FROM departments', function (err, data) {
+        console.table(data);
+});
     promptOptions()
 }
 
 // 4. View all Employees by Department
-function promptPositions() {
-    db.query('SELECT * FROM employees', function (err, results) {
-        console.table(results);
-    });
+function promptEmplsDept() {
+    // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
+    db.query('SELECT * FROM departments', function (err, data) {
+        console.table(data);
+});
     promptOptions()
 }
 
 // 5. View all Employees by Manager
-function promptPositions() {
-    db.query('SELECT * FROM employees', function (err, results) {
-        console.table(results);
-    });
+function promptEmplsMngr() {
+    // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
+    db.query('SELECT * FROM departments', function (err, data) {
+        console.table(data);
+});
     promptOptions()
 }
 
@@ -109,7 +113,9 @@ function promptAddDept() {
         },
     ])
         .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            employees.push(deptName);
             promptOptions();
         });
 }
@@ -141,7 +147,9 @@ function promptAddEmpl() {
         },
     ])
         .then((answers) => {
-            // MUST MODIFY THIS SECTION
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            employees.push(deptName);
             promptOptions();
         });
 }
@@ -167,7 +175,9 @@ function promptAddPosition() {
         },
     ])
         .then((answers) => {
-            // MUST MODIFY THIS SECTION
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            employees.push(deptName);
             promptOptions();
         });
 }
@@ -211,8 +221,10 @@ function promptMngrUpdate() {
         },
     ])
         .then((answers) => {
-            // MUST MODIFY THIS SECTION
-            promptOptions();
+           // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+           const deptName = new deptName(answers.deptName);
+           employees.push(deptName);
+           promptOptions();
         });
 }
 
@@ -227,7 +239,9 @@ function promptdltDept() {
         }
     ])
         .then((answers) => {
-            // MUST MODIFY THIS SECTION
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            employees.push(deptName);
             promptOptions();
         });
 }
@@ -243,7 +257,9 @@ function promptdltEmpl() {
         }
     ])
         .then((answers) => {
-            // MUST MODIFY THIS SECTION
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            employees.push(deptName);
             promptOptions();
         });
 }
@@ -260,7 +276,9 @@ function promptdltPosition() {
         }
     ])
         .then((answers) => {
-            // MUST MODIFY THIS SECTION
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            employees.push(deptName);
             promptOptions();
         });
 }
