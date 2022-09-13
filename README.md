@@ -32,7 +32,9 @@ THEN I enter its name, salary, and department and table/database is updated
 WHEN I choose "add employee"
 THEN I enter his/her/ther’s first name, last name, position, and manager and table/database is updated
 WHEN I choose to update outdated employee position information
-THEN I am prompted to select one of the positions and table/database is updated
+THEN I am prompted to select one of the employee positions and table/database is updated
+WHEN I choose any of the BONUS prompts - (1) View employees by Manager (2) View employees by Department (3) Delete Department (4) Delete Position (5) Delete Employee (6) Update Manager Position (6) Sum of Salaries 
+THEN I am able to update respective BONUS information and table/database is updated
 ```
 ## Screenshots
 [tbd]
