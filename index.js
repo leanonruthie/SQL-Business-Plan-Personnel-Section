@@ -1,21 +1,14 @@
 // Work Reference #1 - a reminder to create proper inquirer prompts using my own homework assignment - OOP-Team-Roster Assignment - for Week 10
 
 const mysql = require('mysql2'); 
+const fs = require('fs');
+const renderTable = require('console.table')
 const inquirer = require('inquirer');
-// const db = require('./db/connection.js')
+// Work reference #2 -RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/12-Stu_Connect-Node - See connection.js for below const
+const db = require('./db/connection.js');
 
-// Work Reference #2 - Place this section in connection.js THEN connection.js in .gitignore later if I don't want my root password to show (my root password was changed to a generic one and I'm all right with it showing in public for now)
-const db = mysql.createConnection(
-    {
-      // MySQL username,
-      user: 'root',
-      // MySQL password
-      password: 'MyNew#1PW!',
-      database: 'company_db'
-    },
-    console.log(`Connected to the company_db database.`)
-  );
-  
+const myEmpls=[];
+
  // initializing inquirer prompt 
 promptOptions()
 
@@ -68,10 +61,9 @@ function promptOptions() {
 
 // 1. View All Departments
 function promptDepts() {
-    // Query database - const db found in connection.js to hide password
-    db.query('SELECT * FROM departments', function (err, results) {
+    db.query('SELECT * FROM employees', function (err, results) {
         console.table(results);
-    });
+});
     promptOptions()
 }
 
