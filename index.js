@@ -5,11 +5,6 @@ const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const db = require('./db/connection.js')
 
-// Query database - const db found in connection.js to hide password
-db.query('SELECT * FROM students', function (err, results) {
-    console.table(results);
-});
-
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const db = require('./db/connection.js')
@@ -21,7 +16,7 @@ function promptOptions() {
             type: 'list',
             name: 'options',
             message: 'Please select ONE:',
-            choices: ['View All Departments', 'View All Employees', 'View all Positions', 'View All Employees by Their Department', 'View All Employees by Their Manager', 'Add a Department', 'Add an Employee', 'Add a Position', 'Update Employee Position', 'Update Manager Position', 'Delete Department','Delete an Employee','Delete a Position','Exit']
+            choices: ['View All Departments', 'View All Employees', 'View all Positions', 'View All Employees by Their Department', 'View All Employees by Their Manager', 'Add a Department', 'Add an Employee', 'Add a Position', 'Update Employee Position', 'Update Manager Position', 'Delete Department', 'Delete an Employee', 'Delete a Position', 'Exit']
         }
     ])
         .then((answers) => {
@@ -56,14 +51,17 @@ function promptOptions() {
                 promptdltEmpl();
             }
             else {
-                // MUST COMPLETE THIS SECTION
+                promptOptions()
             }
         });
 }
 
 // 1. View All Departments
 function promptDepts() {
-    // MUST RENDER DEPARTMENT TABLE
+    // Query database - const db found in connection.js to hide password
+    db.query('SELECT * FROM departments', function (err, results) {
+        console.table(results);
+    });
     promptOptions()
 }
 
@@ -257,5 +255,4 @@ function promptdltPosition() {
         });
 }
 
-// 14. Exit or restart
-promptOptions()
+// 14. Exit or restart is already in else statement in initial prompt

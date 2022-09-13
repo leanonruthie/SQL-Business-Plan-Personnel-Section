@@ -1,8 +1,8 @@
-# 12 SQL: Employee Tracker
+# SQL-Business-Plan-Personnel-Section
 
 ## Work References
 * Week 10 OOP-Team-Roster Assignment for working prompts(i.e., functioning Inquirer)
-* RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/ for working mySQL (i.e., schema.sql, query.sql, query.sql)
+* RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/ for testing/working mySQL (i.e., schema.sql, query.sql, query.sql)
 * My brilliant study buddies, instructor, TA and tutor for integration
 
 ## User Story
