@@ -1,13 +1,23 @@
 // Work Reference #1 - a reminder to create proper inquirer prompts using my own homework assignment - OOP-Team-Roster Assignment - for Week 10
-// Work Reference #2 - Connect to database without my Password showing using connection.js with sample found in - RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/12-Stu_Connect-Node
 
-const mysql = require('mysql2');
+const mysql = require('mysql2'); 
 const inquirer = require('inquirer');
-const db = require('./db/connection.js')
+// const db = require('./db/connection.js')
 
-const mysql = require('mysql2');
-const inquirer = require('inquirer');
-const db = require('./db/connection.js')
+// Work Reference #2 - Place this section in connection.js THEN connection.js in .gitignore later if I don't want my root password to show (my root password was changed to a generic one and I'm all right with it showing in public for now)
+const db = mysql.createConnection(
+    {
+      // MySQL username,
+      user: 'root',
+      // MySQL password
+      password: 'MyNew#1PW!',
+      database: 'company_db'
+    },
+    console.log(`Connected to the company_db database.`)
+  );
+  
+ // initializing inquirer prompt 
+promptOptions()
 
 // Choose one of many options
 function promptOptions() {
@@ -67,25 +77,33 @@ function promptDepts() {
 
 // 2. View All Employees
 function promptEmpls() {
-    // MUST RENDER EMPLOYEE TABLE
+    db.query('SELECT * FROM employees', function (err, results) {
+        console.table(results);
+    });
     promptOptions()
 }
 
 // 3. View all Positions
 function promptPositions() {
-    // MUST RENDER POSITION TABLE
+    db.query('SELECT * FROM positions', function (err, results) {
+        console.table(results);
+    });
     promptOptions()
 }
 
 // 4. View all Employees by Department
 function promptPositions() {
-    // MUST RENDER POSITION TABLE
+    db.query('SELECT * FROM employees', function (err, results) {
+        console.table(results);
+    });
     promptOptions()
 }
 
 // 5. View all Employees by Manager
 function promptPositions() {
-    // MUST RENDER POSITION TABLE
+    db.query('SELECT * FROM employees', function (err, results) {
+        console.table(results);
+    });
     promptOptions()
 }
 
