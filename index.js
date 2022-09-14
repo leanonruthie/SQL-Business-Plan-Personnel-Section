@@ -2,8 +2,8 @@
 
 const fs = require('fs');
 const inquirer = require('inquirer');
-// Work reference #2 -RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/12-Stu_Connect-Node - See connection.js for below const
-const db = require('./db/connection.js');
+// Work reference #2 -RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/12-Stu_Connect-Node - See db.js for below const
+const db = require('./db/db');
 
 const myEmpls = [];
 
