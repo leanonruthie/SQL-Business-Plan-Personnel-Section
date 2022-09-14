@@ -15,40 +15,40 @@ function promptOptions() {
     inquirer.prompt([
         {
             type: 'list',
-            name: 'options',
+            name: 'selection',
             message: 'Please select ONE:',
             choices: ['View All Departments', 'View All Employees', 'View all Positions', 'View All Employees by Their Department', 'View All Employees by Their Manager', 'Add a Department', 'Add an Employee', 'Add a Position', 'Update Employee Position', 'Update Manager Position', 'Delete Department', 'Delete an Employee', 'Delete a Position', 'Exit']
         }
     ])
         .then((answers) => {
-            if (answers.choice == "View All Departments") {
+            if (answers.selection == "View All Departments") {
                 promptDepts();
-            } else if (answers.choice == "View All Employees") {
+            } else if (answers.selection == "View All Employees") {
                 promptEmpls();
-            } else if (answers.choice == "View all Positions") {
+            } else if (answers.selection == "View all Positions") {
                 promptPositions();
-            } else if (answers.choice == "View All Employees by Their Department") {
+            } else if (answers.selection == "View All Employees by Their Department") {
                 promptEmplsDept();
-            } else if (answers.choice == "View All Employees by Their Manager") {
+            } else if (answers.selection == "View All Employees by Their Manager") {
                 promptEmplsMngr();
-            } else if (answers.choice == "Add a Department") {
+            } else if (answers.selection == "Add a Department") {
                 promptAddDept();
-            } else if (answers.choice == "Add an Employee") {
+            } else if (answers.selection == "Add an Employee") {
                 promptAddEmpl();
-            } else if (answers.choice == "Add a Position") {
+            } else if (answers.selection == "Add a Position") {
                 promptAddPosition();
-            } else if (answers.choice == "Update Employee Position") {
+            } else if (answers.selection == "Update Employee Position") {
                 promptEmplUpdate();
-            } else if (answers.choice == "Update Manager Position") {
+            } else if (answers.selection == "Update Manager Position") {
                 promptMngrUpdate();
             }
-            else if (answers.choice == "Delete a Department") {
+            else if (answers.selection == "Delete a Department") {
                 promptdltDept();
             }
-            else if (answers.choice == "Delete an Employee") {
+            else if (answers.selection == "Delete an Employee") {
                 promptdltPosition();
             }
-            else if (answers.choice == "Delete a Position") {
+            else if (answers.selection == "Delete a Position") {
                 promptdltEmpl();
             }
             else {
