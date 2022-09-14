@@ -19,12 +19,12 @@ VALUES ("Backend Senior Engineer", 150000.00, 1),
 
 INSERT INTO employees (first_name, last_name, position_id, manager_id)
 VALUES ("Keanu", "Reeves", 1, NULL),
-    ("Dave", "Chappelle", 2, NULL),
-    ("Bethenny", "Frankel", 3, NULL),
-    ("Jermaine", "Cole", 4, NULL),
-    ("Doja", "Cat", 5, NULL),
-    ("Bill", "Gates", 6, NULL),
+    ("Dave", "Chappelle", 2, 1),
+    ("Bethenny", "Frankel", 3, 2),
+    ("Jermaine", "Cole", 4, 3),
+    ("Doja", "Cat", 5, 3),
+    ("Bill", "Gates", 6, 3),
     ("Michael", "Jordan", 7, NULL),
     ("Gayle", "King", 8, NULL),
-    ("Sade", "Adu", 9, NULL),
+    ("Sade", "Adu", 9, 4),
     ("Jidenna","Mobisson", 10, NULL);

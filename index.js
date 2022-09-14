@@ -2,10 +2,17 @@
 
 const fs = require('fs');
 const inquirer = require('inquirer');
+const { devNull } = require('os');
 // Work reference #2 -RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/12-Stu_Connect-Node - See db.js for below const
 const db = require('./db/db');
 
-const myEmpls = [];
+// data returns -> id, first, last, position, manager_id
+
+let myEmpls = db.query("SELECT * FROM employees", function (err, data) {
+    if (err) throw err;
+    console.log(data)
+    myEmpls = data
+  });
 
 // initializing inquirer prompt 
 promptOptions()
@@ -63,6 +70,7 @@ function promptDepts() {
         var sql = "SELECT * FROM departments";
         db.query(sql, function (err, data) {
           if (err) throw err;
+          console.log("\n");
           console.table(data);
         });
         promptOptions()
@@ -75,6 +83,7 @@ function promptEmpls() {
     var sql = "SELECT employees.id AS id, employees.first_name AS first_name, employees.last_name AS last_name, positions.position_name AS position_name, departments.department_name AS department_name,employees.manager_id AS manager_id, positions.salary AS salary FROM departments INNER JOIN positions ON positions.department_id = departments.id INNER JOIN employees ON employees.position_id = positions.id;";
         db.query(sql, function (err, data) {
           if (err) throw err;
+          console.log("\n");
           console.table(data);
         });
         promptOptions()
@@ -86,6 +95,7 @@ function promptPositions() {
     var sql = "SELECT positions.id AS id, positions.position_name AS position_name, positions.salary AS salary, departments.department_name AS department_name FROM positions JOIN departments ON positions.department_id = departments.id;";
         db.query(sql, function (err, data) {
           if (err) throw err;
+          console.log("\n");
           console.table(data);
         });
         promptOptions()
@@ -129,12 +139,15 @@ function promptAddDept() {
             message: 'What is the name of your new department?'
         },
     ])
-        .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            myEmpls.push(deptName);
-            promptOptions();
+    .then((answers) => {
+        // Got Help from Tutoring
+        db.query("INSERT INTO departments(department_name) VALUES (?)" , answers.deptName, function (err, data) {
+            if (err) throw err;
+            console.log("row added!");
+            promptDepts()
         });
+        promptOptions();
+    });
 }
 
 // 8. Add an Employee
@@ -201,12 +214,18 @@ function promptAddPosition() {
 
 // 10. Update Employee Position
 function promptEmplUpdate() {
+// Got help from tutoring myEmpls est. in the beginning   
+// .map to grab only first_name + last_name 
+var fullEmplName = myEmpls.map(element => {
+    return `${element.first_name} ${element.last_name}`
+})
+console.log(fullEmplName)
     return inquirer.prompt([
         {
             type: 'list',
             name: 'emplUpdated',
             message: 'Whose information would you like to update?',
-            choices: []
+            choices: fullEmplName
         },
         {
             type: 'list',

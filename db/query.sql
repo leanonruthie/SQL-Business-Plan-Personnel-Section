@@ -1,13 +1,13 @@
 -- This will be departments table for reference
 SELECT *
-  FROM departments;
+FROM departments;
 
 -- This will be positions table for reference
 SELECT positions.id AS id,
 positions.position_name AS position_name,
 positions.salary AS salary,
 departments.department_name AS department_name
-  FROM positions 
+FROM positions 
   JOIN departments ON positions.department_id = departments.id;
 
 -- This will be employees table for reference
