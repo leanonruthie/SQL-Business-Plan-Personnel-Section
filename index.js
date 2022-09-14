@@ -59,6 +59,7 @@ function promptOptions() {
 
 // 1. View All Departments
 function promptDepts() {
+    // visually the table rendered is not satisfactory - ask tutor
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
     });
@@ -67,7 +68,7 @@ function promptDepts() {
 
 // 2. View All Employees
 function promptEmpls() {
-    // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
+    // visually the table rendered is not satisfactory - ask tutor
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
     });
@@ -76,7 +77,7 @@ function promptEmpls() {
 
 // 3. View all Positions
 function promptPositions() {
-    // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
+    // visually the table rendered is not satisfactory - ask tutor
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
     });
@@ -85,7 +86,7 @@ function promptPositions() {
 
 // 4. View all Employees by Department
 function promptEmplsDept() {
-    // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
+    // visually the table rendered is not satisfactory - ask tutor
     db.query('SELECT * FROM departments', function (err, data) {
         console.table(data);
     });
@@ -94,11 +95,11 @@ function promptEmplsDept() {
 
 // 5. View all Employees by Manager
 function promptEmplsMngr() {
-    // JUST FOR NOW UNTIL I CAN SOMEHOW CREATE A CONST FOR WORKING QUERY FROM QUERY.SQL;
-    db.query('SELECT * FROM departments', function (err, data) {
-        console.table(data);
-    });
-    promptOptions()
+   // visually the table rendered is not satisfactory - ask tutor
+   db.query('SELECT * FROM departments', function (err, data) {
+    console.table(data);
+});
+promptOptions()
 }
 
 // 6. Add a Department
