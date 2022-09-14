@@ -31,6 +31,8 @@ function promptOptions() {
                 promptEmplsDept();
             } else if (answers.selection == "View All Employees by Their Manager") {
                 promptEmplsMngr();
+            } else if (answers.selection == "View Company Budget") {
+                promptBudget();
             } else if (answers.selection == "Add a Department") {
                 promptAddDept();
             } else if (answers.selection == "Add an Employee") {
@@ -41,17 +43,13 @@ function promptOptions() {
                 promptEmplUpdate();
             } else if (answers.selection == "Update Manager Position") {
                 promptMngrUpdate();
-            }
-            else if (answers.selection == "Delete a Department") {
+            } else if (answers.selection == "Delete a Department") {
                 promptdltDept();
-            }
-            else if (answers.selection == "Delete an Employee") {
+            } else if (answers.selection == "Delete an Employee") {
                 promptdltPosition();
-            }
-            else if (answers.selection == "Delete a Position") {
+            } else if (answers.selection == "Delete a Position") {
                 promptdltEmpl();
-            }
-            else {
+            } else {
                 promptOptions()
             }
         });
@@ -95,14 +93,22 @@ function promptEmplsDept() {
 
 // 5. View all Employees by Manager
 function promptEmplsMngr() {
-   // visually the table rendered is not satisfactory - ask tutor
-   db.query('SELECT * FROM departments', function (err, data) {
-    console.table(data);
-});
-promptOptions()
+    // visually the table rendered is not satisfactory - ask tutor
+    db.query('SELECT * FROM departments', function (err, data) {
+        console.table(data);
+    });
+    promptOptions()
 }
 
-// 6. Add a Department
+// 6.  View Sum of Salaries
+function promptBudget() {
+    // visually the table rendered is not satisfactory - ask tutor
+    db.query('SELECT * FROM departments', function (err, data) {
+        console.table(data);
+    });
+    promptOptions()
+}
+// 7. Add a Department
 function promptAddDept() {
     return inquirer.prompt([
         {
@@ -119,7 +125,7 @@ function promptAddDept() {
         });
 }
 
-// 7. Add an Employee
+// 8. Add an Employee
 function promptAddEmpl() {
     return inquirer.prompt([
         {
@@ -153,7 +159,7 @@ function promptAddEmpl() {
         });
 }
 
-// 8. Add a Position
+// 9. Add a Position
 function promptAddPosition() {
     return inquirer.prompt([
         {
@@ -181,7 +187,7 @@ function promptAddPosition() {
         });
 }
 
-// 9. Update Employee Position
+// 10. Update Employee Position
 function promptEmplUpdate() {
     return inquirer.prompt([
         {
@@ -205,7 +211,7 @@ function promptEmplUpdate() {
         });
 }
 
-// 10. Update Employee Position
+// 11. Update Employee Position
 function promptMngrUpdate() {
     return inquirer.prompt([
         {
@@ -229,7 +235,7 @@ function promptMngrUpdate() {
         });
 }
 
-// 11. Delete a Department
+// 12. Delete a Department
 function promptdltDept() {
     return inquirer.prompt([
         {
@@ -247,7 +253,7 @@ function promptdltDept() {
         });
 }
 
-// 12. Delete an Employee
+// 13. Delete an Employee
 function promptdltEmpl() {
     return inquirer.prompt([
         {
@@ -266,7 +272,7 @@ function promptdltEmpl() {
 }
 
 
-// 13. Delete a Position
+// 14. Delete a Position
 function promptdltPosition() {
     return inquirer.prompt([
         {
@@ -276,12 +282,11 @@ function promptdltPosition() {
             choices: []
         }
     ])
-    .then((answers) => {
-        // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-        const deptName = new deptName(answers.deptName);
-        myEmpls.push(deptName);
-        promptOptions();
-    });
+        .then((answers) => {
+            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
+            const deptName = new deptName(answers.deptName);
+            myEmpls.push(deptName);
+            promptOptions();
+        });
 }
 
-// 14. Exit or restart is already in else statement in initial prompt
