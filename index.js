@@ -3,7 +3,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 // Work reference #2 -RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/12-Stu_Connect-Node - See connection.js for below const
-const db = require('./db/connection');
+const db = require('./db/connection.js');
 
 const myEmpls = [];
 
@@ -55,37 +55,47 @@ function promptOptions() {
         });
 }
 
+// WORK REFERENCE #3: https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp
+
 // 1. View All Departments
 function promptDepts() {
     // visually the table rendered is not satisfactory - ask tutor
-    db.query('SELECT * FROM departments', function (err, data) {
-        console.table(data);
-    });
-    promptOptions()
-}
+        var sql = "SELECT * FROM departments";
+        db.query(sql, function (err, data) {
+          if (err) throw err;
+          console.table(data);
+        });
+        promptOptions()
+      };
+     
 
 // 2. View All Employees
 function promptEmpls() {
     // visually the table rendered is not satisfactory - ask tutor
-    db.query('SELECT * FROM departments', function (err, data) {
-        console.table(data);
-    });
-    promptOptions()
-}
+    var sql = "SELECT employees.id AS id, employees.first_name AS first_name, employees.last_name AS last_name, positions.position_name AS position_name, departments.department_name AS department_name,employees.manager_id AS manager_id, positions.salary AS salary FROM departments INNER JOIN positions ON positions.department_id = departments.id INNER JOIN employees ON employees.position_id = positions.id;";
+        db.query(sql, function (err, data) {
+          if (err) throw err;
+          console.table(data);
+        });
+        promptOptions()
+      };
 
 // 3. View all Positions
 function promptPositions() {
     // visually the table rendered is not satisfactory - ask tutor
-    db.query('SELECT * FROM departments', function (err, data) {
-        console.table(data);
-    });
-    promptOptions()
-}
+    var sql = "SELECT positions.id AS id, positions.position_name AS position_name, positions.salary AS salary, departments.department_name AS department_name FROM positions JOIN departments ON positions.department_id = departments.id;";
+        db.query(sql, function (err, data) {
+          if (err) throw err;
+          console.table(data);
+        });
+        promptOptions()
+      };
 
 // 4. View all Employees by Department
 function promptEmplsDept() {
     // visually the table rendered is not satisfactory - ask tutor
-    db.query('SELECT * FROM departments', function (err, data) {
+    db.query('SELECT * FROM employees', function (err, data) {
+        if (err) throw err;
         console.table(data);
     });
     promptOptions()
@@ -94,7 +104,8 @@ function promptEmplsDept() {
 // 5. View all Employees by Manager
 function promptEmplsMngr() {
     // visually the table rendered is not satisfactory - ask tutor
-    db.query('SELECT * FROM departments', function (err, data) {
+    db.query('SELECT * FROM employees', function (err, data) {
+        if (err) throw err;
         console.table(data);
     });
     promptOptions()
@@ -104,6 +115,7 @@ function promptEmplsMngr() {
 function promptBudget() {
     // visually the table rendered is not satisfactory - ask tutor
     db.query('SELECT * FROM departments', function (err, data) {
+        if (err) throw err;
         console.table(data);
     });
     promptOptions()
