@@ -38,7 +38,7 @@ WHEN I choose any of the BONUS prompts - (1) View employees by Manager (2) View 
 THEN I am able to update respective BONUS information and table/database is updated
 ```
 ## Screenshots
-* query.sql not required but useful and remains in db folder for consistent testing/querying (Below manager_id still under experimentation and to be replaced with CONCAT(first_name,"",last_name) if possible)
+* query.sql not required but useful and remains in db folder for consistent testing/querying (Below manager_id still under experimentation and to be replaced with CONCAT(first_name,"",last_name) if there's enough time for a pristine table)
  <img src="./Assets/Screen%20Shot%202022-09-14%20at%2012.35.42%20PM.png">
  <img src="./Assets/Screen%20Shot%202022-09-14%20at%2012.38.51%20PM.png">
 
