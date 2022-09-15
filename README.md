@@ -19,7 +19,7 @@ SO THAT I can appeal to many investors reading my business plan
 ```md
 GIVEN a functioning inquirer
 WHEN I start the application
-THEN I am able to choose from (1) view all departments (2) view all positions (3) view all employees (4) add department (5) add position (6) add employee (7) update to revise any outdated employee position [possibly (8)-(14) BONUS prompts]
+THEN I am able to choose from (1) view all departments (2) view all employees (3) view all positions (4) add department (5) add employee (6) add position (7) update to revise any outdated employee position 
 WHEN I choose "view all departments" 
 THEN I have a table with 2 columns - (1) id (2) department name
 WHEN I choose "view all positions"
@@ -34,7 +34,7 @@ WHEN I choose "add employee"
 THEN I enter his/her/their first name, last name, position, and manager and table/database is updated
 WHEN I choose to update outdated employee position information
 THEN I am prompted to select one of the employee positions and table/database is updated
-WHEN I choose any of the BONUS prompts - (1) View employees by Manager (2) View employees by Department (3) Delete Department (4) Delete Position (5) Delete Employee (6) Update Manager Position (7) Sum of Salaries 
+WHEN I choose any of the BONUS prompts - (1) View employees by Department (2) View employees by Manager (3) Delete Department (4) Delete Employee (5) Delete Position (6) Update Manager Position (7) Sum of Salaries 
 THEN I am able to update respective BONUS information and table/database is updated
 ```
 ## Screenshots
