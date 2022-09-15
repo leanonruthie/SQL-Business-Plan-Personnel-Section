@@ -39,8 +39,8 @@ THEN I am able to update respective BONUS information and table/database is upda
 ```
 ## Screenshots
 * query.sql not required but useful and remains in db folder for consistent testing/querying (Below manager_id still under experimentation and to be replaced with CONCAT(first_name,"",last_name) if there's enough time for a pristine table)
- <img src="./Assets/Screen%20Shot%202022-09-14%20at%2012.35.42%20PM.png">
- <img src="./Assets/Screen%20Shot%202022-09-14%20at%2012.38.51%20PM.png">
+ <img src="./Assets/Screen%20Shot%202022-09-14%20at%208.02.44%20PM%20(2).png">
+ <img src="./Assets/Screen%20Shot%202022-09-14%20at%208.03.20%20PM%20(2).png">
 
 ## Github Repository
 <a href="https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git">https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git</a>
