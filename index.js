@@ -2,15 +2,16 @@
 
 const fs = require('fs');
 const inquirer = require('inquirer');
+// provided from tutoring
 const { devNull } = require('os');
 // Work reference #2 -RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/12-Stu_Connect-Node - See db.js for below const
 const db = require('./db/db');
 
-// data returns -> id, first, last, position, manager_id
+// From tutoring, below "data" returns id, first_name, last_name, position_id, manager_id from employees table dynamically
 
 let myEmpls = db.query("SELECT * FROM employees", function (err, data) {
     if (err) throw err;
-    console.log(data)
+    // console.log(data)
     myEmpls = data
   });
 
@@ -66,7 +67,6 @@ function promptOptions() {
 
 // 1. View All Departments
 function promptDepts() {
-    // visually the table rendered is not satisfactory - ask tutor
         var sql = "SELECT * FROM departments";
         db.query(sql, function (err, data) {
           if (err) throw err;
@@ -79,7 +79,6 @@ function promptDepts() {
 
 // 2. View All Employees
 function promptEmpls() {
-    // visually the table rendered is not satisfactory - ask tutor
     var sql = "SELECT employees.id AS id, employees.first_name AS first_name, employees.last_name AS last_name, positions.position_name AS position_name, departments.department_name AS department_name,employees.manager_id AS manager_id, positions.salary AS salary FROM departments INNER JOIN positions ON positions.department_id = departments.id INNER JOIN employees ON employees.position_id = positions.id;";
         db.query(sql, function (err, data) {
           if (err) throw err;
@@ -91,7 +90,6 @@ function promptEmpls() {
 
 // 3. View all Positions
 function promptPositions() {
-    // visually the table rendered is not satisfactory - ask tutor
     var sql = "SELECT positions.id AS id, positions.position_name AS position_name, positions.salary AS salary, departments.department_name AS department_name FROM positions JOIN departments ON positions.department_id = departments.id;";
         db.query(sql, function (err, data) {
           if (err) throw err;
@@ -101,35 +99,14 @@ function promptPositions() {
         promptOptions()
       };
 
-// 4. View all Employees by Department
-function promptEmplsDept() {
-    // visually the table rendered is not satisfactory - ask tutor
-    db.query('SELECT * FROM employees', function (err, data) {
-        if (err) throw err;
-        console.table(data);
-    });
-    promptOptions()
-}
+// 4. BONUS: View all Employees by Department
 
-// 5. View all Employees by Manager
-function promptEmplsMngr() {
-    // visually the table rendered is not satisfactory - ask tutor
-    db.query('SELECT * FROM employees', function (err, data) {
-        if (err) throw err;
-        console.table(data);
-    });
-    promptOptions()
-}
 
-// 6.  View Sum of Salaries
-function promptBudget() {
-    // visually the table rendered is not satisfactory - ask tutor
-    db.query('SELECT * FROM departments', function (err, data) {
-        if (err) throw err;
-        console.table(data);
-    });
-    promptOptions()
-}
+// 5. BONUS: View all Employees by Manager
+
+
+// 6.  BONUS: View Sum of Salaries by Department
+
 // 7. Add a Department
 function promptAddDept() {
     return inquirer.prompt([
@@ -146,7 +123,6 @@ function promptAddDept() {
             console.log("row added!");
             promptDepts()
         });
-        promptOptions();
     });
 }
 
@@ -177,10 +153,7 @@ function promptAddEmpl() {
         },
     ])
         .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            myEmpls.push(deptName);
-            promptOptions();
+            // TBD
         });
 }
 
@@ -205,10 +178,7 @@ function promptAddPosition() {
         },
     ])
         .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            myEmpls.push(deptName);
-            promptOptions();
+            // TBD
         });
 }
 
@@ -216,8 +186,11 @@ function promptAddPosition() {
 function promptEmplUpdate() {
 // Got help from tutoring myEmpls est. in the beginning   
 // .map to grab only first_name + last_name 
-var fullEmplName = myEmpls.map(element => {
+var fullNewEmplName = myEmpls.map(element => {
     return `${element.first_name} ${element.last_name}`
+})
+var fullNewEmplPosition = myEmpls.map(element => {
+    return `${element.position_id}`
 })
 console.log(fullEmplName)
     return inquirer.prompt([
@@ -225,20 +198,17 @@ console.log(fullEmplName)
             type: 'list',
             name: 'emplUpdated',
             message: 'Whose information would you like to update?',
-            choices: fullEmplName
+            choices: fullNewEmplName
         },
         {
             type: 'list',
             name: 'updatePosition',
             message: 'Which new position will the employee fulfill?',
-            choices: []
+            choices: fullNewEmplPosition
         },
     ])
         .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            myEmpls.push(deptName);
-            promptOptions();
+            // TBD
         });
 }
 
@@ -259,65 +229,14 @@ function promptMngrUpdate() {
         },
     ])
         .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            myEmpls.push(deptName);
-            promptOptions();
+            // TBD
         });
 }
 
-// 12. Delete a Department
-function promptdltDept() {
-    return inquirer.prompt([
-        {
-            type: 'list',
-            name: 'dltDept',
-            message: 'Which Department would you like to delete?',
-            choices: []
-        }
-    ])
-        .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            myEmpls.push(deptName);
-            promptOptions();
-        });
-}
-
-// 13. Delete an Employee
-function promptdltEmpl() {
-    return inquirer.prompt([
-        {
-            type: 'list',
-            name: 'dltEmpl',
-            message: 'Which Employee would you like to delete?',
-            choices: []
-        }
-    ])
-        .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            myEmpls.push(deptName);
-            promptOptions();
-        });
-}
+// 12. BONUS: Delete a Department
 
 
-// 14. Delete a Position
-function promptdltPosition() {
-    return inquirer.prompt([
-        {
-            type: 'list',
-            name: 'dltPosition',
-            message: 'Which Position would you like to delete?',
-            choices: []
-        }
-    ])
-        .then((answers) => {
-            // MUST UPDATE DEPARTMENT DATABASE (BELOW IS FROM HW AND MUST BE MODIFIED)
-            const deptName = new deptName(answers.deptName);
-            myEmpls.push(deptName);
-            promptOptions();
-        });
-}
+// 13. BONUS: Delete an Employee
 
+
+// 14. BONUS: Delete a Position

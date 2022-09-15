@@ -19,7 +19,7 @@ SO THAT I can appeal to many investors reading my business plan
 ```md
 GIVEN a functioning inquirer
 WHEN I start the application
-THEN I am able to choose from (1) view all departments (2) view all positions (3) view all employees (4) add department (5) add position (6) add employee (7) update to revise any outdated employee information [possibly (8)-(14) BONUS prompts]
+THEN I am able to choose from (1) view all departments (2) view all positions (3) view all employees (4) add department (5) add position (6) add employee (7) update to revise any outdated employee position [possibly (8)-(14) BONUS prompts]
 WHEN I choose "view all departments" 
 THEN I have a table with 2 columns - (1) id (2) department name
 WHEN I choose "view all positions"
@@ -39,8 +39,8 @@ THEN I am able to update respective BONUS information and table/database is upda
 ```
 ## Screenshots
 * query.sql not required but useful and remains in db folder for consistent testing/querying (Below manager_id still under experimentation and to be replaced with CONCAT(first_name,"",last_name) if there's enough time for a pristine table)
- <img src="./Assets/Screen%20Shot%202022-09-14%20at%208.02.44%20PM%20(2).png">
- <img src="./Assets/Screen%20Shot%202022-09-14%20at%208.03.20%20PM%20(2).png">
+ <img src="./Assets/Screen%20Shot%202022-09-14%20at%2011.26.59%20PM.png">
+ <img src="./Assets/Screen%20Shot%202022-09-14%20at%2011.27.13%20PM.png">
 
 ## Github Repository
 <a href="https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git">https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git</a>

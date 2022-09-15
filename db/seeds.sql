@@ -21,7 +21,7 @@ INSERT INTO employees (first_name, last_name, position_id, manager_id)
 VALUES ("Bill", "Gates", 6, NULL),
     ("Michael", "Jordan", 7, NULL),
     ("Gayle", "King", 8, NULL),
-    ("Sade", "Adu", 9, 4),
+    ("Sade", "Adu", 9, NULL),
     ("Jidenna","Mobisson", 10, NULL),
     ("Keanu", "Reeves", 1, 1),
     ("Dave", "Chappelle", 2, 2),

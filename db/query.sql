@@ -23,3 +23,4 @@ positions.salary AS salary
   ON positions.department_id = departments.id
   INNER JOIN employees
   ON employees.position_id = positions.id;
+
