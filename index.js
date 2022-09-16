@@ -100,12 +100,79 @@ function promptAddDept() {
         },
     ])
         .then((answers) => {
-            // Got Help from Tutoring
             db.query("INSERT INTO departments(department_name) VALUES (?)", answers.deptName, function (err, data) {
                 if (err) throw err;
-                console.log("New Department Added!");
-                promptDepts(data)
+                promptDepts(data);
             });
+        });
+}
+
+// Help from tutoring, below "data" returns id, first_name, last_name, position_id, manager_id from  employees table dynamically for var inside Prompt 5
+let myEmpls = db.query("SELECT * FROM employees", function (err, data) {
+    if (err) throw err;
+    // console.log(data) working but lengthy
+    myEmpls = data
+});
+
+// Help from tutoring, "data" returns id, position_name, salary, department_id, from  positions table dynamically for var inside Prompt 5
+let myPstns = db.query("SELECT * FROM positions", function (err, data) {
+    if (err) throw err;
+    // console.log(data) working but lengthy
+    myPstns = data
+});
+
+// 5. Add an Employee 
+function promptAddEmpl() {
+    // from tutoring - .map to grab position_names only
+    var newEmplPositions = myPstns.map(element => {
+        return `${element.position_name}`
+    });
+    // from tutoring .map to grab first_name + last_name only
+    var fullEmplName = myEmpls.map(element => {
+        return `${element.first_name} ${element.last_name}`
+    });
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'emplFirst',
+            message: 'What is the first name of the new employee?'
+        },
+        {
+            type: 'input',
+            name: 'emplLast',
+            message: 'What is the last name of the new employee?'
+        },
+        {
+            type: 'list',
+            name: 'newEmplPstn',
+            message: 'What will be his/her/their position?',
+            choices: newEmplPositions
+        },
+        {
+            type: 'list',
+            name: 'newEmplMngr',
+            message: 'Who is his/her/their manager?',
+            choices: fullEmplName
+        },
+    ])
+        .then((answers) => {
+            db.query("INSERT INTO employees(first_name) VALUES (?)", answers.emplFirst, function (err, data) {
+                if (err) throw err;
+                console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Employees Now.");
+            });
+            db.query("INSERT INTO employees(last_name) VALUES (?)", answers.emplLast, function (err, data) {
+                if (err) throw err;
+                console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Employees Now.");
+            });
+            db.query("INSERT INTO positions(position_name) VALUES (?)", answers.newEmplPstn, function (err, data) {
+                if (err) throw err;
+                console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Positions Now.");
+            });
+            db.query("SELECT * FROM employees", function (err, data) {
+                if (err) throw err;
+                console.table(data)
+            });
+            promptOptions()
         });
 }
 
