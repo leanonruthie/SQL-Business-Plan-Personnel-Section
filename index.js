@@ -57,7 +57,6 @@ function promptOptions() {
         });
 }
 
-
 // 1. View All Departments
 function promptDepts() {
     var sql = "SELECT * FROM departments";
@@ -71,7 +70,7 @@ function promptDepts() {
 
 // 2. View All Employees
 function promptEmpls() {
-    var sql = "SELECT employees.id AS id, employees.first_name AS first_name, employees.last_name AS last_name, positions.position_name AS position_name, departments.department_name AS department_name,employees.manager_id AS manager_id, positions.salary AS salary FROM departments INNER JOIN positions ON positions.department_id = departments.id INNER JOIN employees ON employees.position_id = positions.id;";
+    var sql = "SELECT employees.id AS id, employees.first_name AS first_name, employees.last_name AS last_name, positions.position_name AS position_name, departments.department_name AS department_name, employees.manager_id AS manager_id, managers.first_name AS manager_first_name, managers.last_name as manager_last_name, positions.salary AS salary FROM departments INNER JOIN positions ON positions.department_id = departments.id INNER JOIN employees ON employees.position_id = positions.id LEFT JOIN employees AS managers ON employees.manager_id = managers.id;";
     db.query(sql, function (err, data) {
         if (err) throw err;
         console.log("\n");
@@ -104,19 +103,9 @@ function promptAddDept() {
             // Got Help from Tutoring
             db.query("INSERT INTO departments(department_name) VALUES (?)", answers.deptName, function (err, data) {
                 if (err) throw err;
-                console.log("Department added!");
+                console.log("New Department Added!");
                 promptDepts(data)
             });
         });
 }
 
-// 5. add employee 
-// 6. add position 
-// 7. update to revise any outdated employee position 
-// BONUS 1: View all Employees by Department
-// BONUS 2: View all Employees by Manager
-// BONUS 3: Delete a Department
-// BONUS 4: Delete an Employee
-// BONUS 5: Delete a Position
-// BONUS 6: Update Manager Position
-// BONUS 7: View Sum of Salaries by Department

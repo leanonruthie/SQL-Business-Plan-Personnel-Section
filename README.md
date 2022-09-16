@@ -38,9 +38,9 @@ WHEN I choose any of the BONUS prompts - (1) View employees by Department (2) Vi
 THEN I am able to update respective BONUS information and table/database is updated
 ```
 ## Screenshots
-* query.sql not required but useful and remains in db folder for consistent testing/querying (Below manager_id still under experimentation and to be replaced with CONCAT(first_name,"",last_name) if there's enough time for a pristine table)
- <img src="./Assets/Screen%20Shot%202022-09-14%20at%2011.26.59%20PM.png">
- <img src="./Assets/Screen%20Shot%202022-09-14%20at%2011.27.13%20PM.png">
+* query.sql not required but useful and remains in db folder for consistent testing/querying
+ <img src="./Assets/Screen%20Shot%202022-09-15%20at%2010.09.19%20PM%20(2).png">
+ <img src="./Assets/Screen%20Shot%202022-09-15%20at%2010.12.06%20PM%20(2).png">
 
 ## Github Repository
 <a href="https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git">https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git</a>
