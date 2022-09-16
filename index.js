@@ -156,23 +156,102 @@ function promptAddEmpl() {
         },
     ])
         .then((answers) => {
-            db.query("INSERT INTO employees(first_name) VALUES (?)", answers.emplFirst, function (err, data) {
+            db.query("INSERT INTO employees(first_name, last_name) VALUES (?,?)", [answers.emplFirst, answers.emplLast], function (err, data) {
                 if (err) throw err;
                 console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Employees Now.");
-            });
-            db.query("INSERT INTO employees(last_name) VALUES (?)", answers.emplLast, function (err, data) {
-                if (err) throw err;
-                console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Employees Now.");
-            });
-            db.query("INSERT INTO positions(position_name) VALUES (?)", answers.newEmplPstn, function (err, data) {
-                if (err) throw err;
-                console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Positions Now.");
             });
             db.query("SELECT * FROM employees", function (err, data) {
                 if (err) throw err;
                 console.table(data)
             });
+            // 1. how do I grab position_id and manager_id from answers.newEmplPstn and answers.newEmplMngr?!?!
+            // 2. how do I return a pristine table like my original table from promptEmpls()?!?!?!
             promptOptions()
         });
+    }
+
+// Help from tutoring, "data" returns id, department_name from departments table dynamically for var inside Prompt 5
+
+let myDepts = db.query("SELECT * FROM departments", function (err, data) {
+    if (err) throw err;
+    // console.log(data)
+    myDepts = data
+});
+
+// 6. add position 
+function promptAddPosition() {
+    // .map to grab department only
+    var deptNewPosition = myDepts.map(element => {
+        return `${element.department_name}`
+    });
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newPosition',
+            message: 'What is the name of the new position?'
+        },
+        {
+            type: 'input',
+            name: 'newPositionSalary',
+            message: 'What is salary of the new position?'
+        },
+        {
+            type: 'list',
+            name: 'newPositionDept',
+            message: 'Which department will the new position be in?',
+            choices: deptNewPosition
+        },
+    ])
+    .then((answers) => {
+        db.query("INSERT INTO positions(position_name, salary) VALUES (?,?)", [answers.newPosition, answers.newPositionSalary], function (err, data) {
+            if (err) throw err;
+            console.log(data.affectedRows, "Row Inserted in Positions Table!");
+        });
+        db.query("SELECT * FROM positions", function (err, data) {
+            if (err) throw err;
+            console.table(data)
+        });
+        // 1. how do I grab department_id from answers.newPositionDept!?!??!!
+        // 2. how do I return a pristine table like my original table from promptPositions()?!?!?!?
+        promptOptions()
+    });
 }
 
+// 7. update to revise any outdated employee position 
+function promptEmplUpdate() {
+    // from tutoring - .map to grab position_names only
+    var newEmplPositions = myPstns.map(element => {
+        return `${element.position_name}`
+    });
+    // from tutoring .map to grab first_name + last_name only
+    var fullEmplName = myEmpls.map(element => {
+        return `${element.first_name} ${element.last_name}`
+    });
+    return inquirer.prompt([
+        {
+            type: 'list',
+            name: 'emplUpdated',
+            message: 'Whose information would you like to update?',
+            choices: fullEmplName
+        },
+        {
+            type: 'list',
+            name: 'updatePosition',
+            message: 'Which position does the employee currently fulfill?',
+            choices: newEmplPositions
+        },
+    ])
+    .then((answers) => {
+        db.query("INSERT INTO employees(first_name, last_name) VALUES (?,?)", [answers.emplFirst, answers.emplLast], function (err, data) {
+            if (err) throw err;
+            console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Employees Now.");
+        });
+        db.query("SELECT * FROM employees", function (err, data) {
+            if (err) throw err;
+            console.table(data)
+        });
+        // 1. how do I grab id and position_id from answers.emplUpdated and updatePosition?!?!?!
+        // 2. how do I return a pristine table like my original table from promptEmpls()?!?!?!
+        promptOptions()
+    });
+}
