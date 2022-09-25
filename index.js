@@ -19,7 +19,7 @@ function promptOptions() {
             type: 'list',
             name: 'selection',
             message: 'Please select ONE:',
-            choices: ['View All Departments', 'View All Employees', 'View all Positions', 'Add a Department', 'Add an Employee', 'Add a Position', 'Update Employee Position', 'View All Employees by Their Department', 'View All Employees by Their Manager', 'Delete Department', 'Delete an Employee', 'Delete a Position', 'Update Manager Position']
+            choices: ['View All Departments', 'View All Employees', 'View All Positions', 'Add a Department', 'Add an Employee', 'Add a Position', 'Update Employee Position']
         }
     ])
         .then((answers) => {
@@ -27,14 +27,8 @@ function promptOptions() {
                 promptDepts();
             } else if (answers.selection == "View All Employees") {
                 promptEmpls();
-            } else if (answers.selection == "View all Positions") {
+            } else if (answers.selection == "View All Positions") {
                 promptPositions();
-            } else if (answers.selection == "View All Employees by Their Department") {
-                promptEmplsDept();
-            } else if (answers.selection == "View All Employees by Their Manager") {
-                promptEmplsMngr();
-            } else if (answers.selection == "View Company Budget") {
-                promptBudget();
             } else if (answers.selection == "Add a Department") {
                 promptAddDept();
             } else if (answers.selection == "Add an Employee") {
@@ -43,14 +37,6 @@ function promptOptions() {
                 promptAddPosition();
             } else if (answers.selection == "Update Employee Position") {
                 promptEmplUpdate();
-            } else if (answers.selection == "Update Manager Position") {
-                promptMngrUpdate();
-            } else if (answers.selection == "Delete a Department") {
-                promptdltDept();
-            } else if (answers.selection == "Delete an Employee") {
-                promptdltPosition();
-            } else if (answers.selection == "Delete a Position") {
-                promptdltEmpl();
             } else {
                 promptOptions()
             }
@@ -155,20 +141,33 @@ function promptAddEmpl() {
             choices: fullEmplName
         },
     ])
+        // I learned from tutoring this is called callback hell; callback hell was used here instead of a simple and direct prompt asking for the manager_id and position_id because I already dynamically pushed all options in prompts in full out list; doing this assignment the hard way proved that async/await is crucial and sequelize/express saves a lot of time than verbatim commands in sql
+
         .then((answers) => {
-            db.query("INSERT INTO employees(first_name, last_name) VALUES (?,?)", [answers.emplFirst, answers.emplLast], function (err, data) {
+            let managerId = "";
+            // to split full name of chosen managers
+            db.query("SELECT id from employees WHERE first_name = ? and last_name = ?", [answers.newEmplMngr.split(" ")[0], answers.newEmplMngr.split(" ")[1]], function (err, data) {
                 if (err) throw err;
-                console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Employees Now.");
+                console.log(data);
+                managerId = data[0].id;
+                let positionId = "";
+                db.query("SELECT id from positions WHERE position_name = ?", [answers.newEmplPstn], function (err2, data2) {
+                    if (err2) throw err2;
+                    console.log(data2);
+                    positionId = data2[0].id;
+                    db.query("INSERT INTO employees (first_name, last_name, manager_id, position_id) VALUES (?,?,?,?)", [answers.emplFirst, answers.emplLast, managerId, positionId], function (err3, data3) {
+                        if (err3) throw err3;
+                        console.log(data3);
+                        db.query("SELECT * FROM employees", function (err4, data4) {
+                            if (err4) throw err4;
+                            console.table(data4)
+                        });
+                    });
+                })
             });
-            db.query("SELECT * FROM employees", function (err, data) {
-                if (err) throw err;
-                console.table(data)
-            });
-            // 1. how do I grab position_id and manager_id from answers.newEmplPstn and answers.newEmplMngr?!?!
-            // 2. how do I return a pristine table like my original table from promptEmpls()?!?!?!
             promptOptions()
         });
-    }
+};
 
 // Help from tutoring, "data" returns id, department_name from departments table dynamically for var inside Prompt 5
 
@@ -186,6 +185,12 @@ function promptAddPosition() {
     });
     return inquirer.prompt([
         {
+            type: 'list',
+            name: 'newPositionDept',
+            message: 'Which department will the new position be in?',
+            choices: deptNewPosition
+        },
+        {
             type: 'input',
             name: 'newPosition',
             message: 'What is the name of the new position?'
@@ -194,27 +199,26 @@ function promptAddPosition() {
             type: 'input',
             name: 'newPositionSalary',
             message: 'What is salary of the new position?'
-        },
-        {
-            type: 'list',
-            name: 'newPositionDept',
-            message: 'Which department will the new position be in?',
-            choices: deptNewPosition
-        },
+        }
     ])
-    .then((answers) => {
-        db.query("INSERT INTO positions(position_name, salary) VALUES (?,?)", [answers.newPosition, answers.newPositionSalary], function (err, data) {
-            if (err) throw err;
-            console.log(data.affectedRows, "Row Inserted in Positions Table!");
+        .then((answers) => {
+            console.log(deptNewPosition);
+            let deptId = "";
+            db.query("SELECT id FROM departments WHERE department_name = ?", [answers.newPositionDept], function (err, data) {
+                if (err) throw err;
+                console.log(data);
+                deptId = data[0].id;
+                db.query("INSERT INTO positions (position_name, salary, department_id) VALUES (?,?,?)", [answers.newPosition, answers.newPositionSalary, deptId], function (err2, data2) {
+                    if (err2) throw err2;
+                    console.log(data2);
+                    db.query("SELECT * FROM positions", function (err3, data3) {
+                        if (err3) throw err3;
+                        console.table(data3)
+                    });
+                });
+            });
+            promptOptions()
         });
-        db.query("SELECT * FROM positions", function (err, data) {
-            if (err) throw err;
-            console.table(data)
-        });
-        // 1. how do I grab department_id from answers.newPositionDept!?!??!!
-        // 2. how do I return a pristine table like my original table from promptPositions()?!?!?!?
-        promptOptions()
-    });
 }
 
 // 7. update to revise any outdated employee position 
@@ -241,17 +245,21 @@ function promptEmplUpdate() {
             choices: newEmplPositions
         },
     ])
-    .then((answers) => {
-        db.query("INSERT INTO employees(first_name, last_name) VALUES (?,?)", [answers.emplFirst, answers.emplLast], function (err, data) {
-            if (err) throw err;
-            console.log(data.affectedRows, "Row Inserted in Employees Table! Please View All Employees Now.");
+        .then((answers) => {
+            let positionId = "";
+            db.query("SELECT id from positions WHERE position_name = ?", [answers.updatePosition], function (err, data) {
+                if (err) throw err;
+                console.log(data);
+                positionId = data[0].id;
+                db.query("INSERT INTO employees(first_name, last_name, position_id) VALUES (?,?,?)", [answers.emplFirst, answers.emplLast, positionId], function (err2, data2) {
+                    if (err2) throw err2;
+                    console.log(data2);
+                    db.query("SELECT * FROM employees", function (err, data) {
+                        if (err) throw err;
+                        console.table(data)
+                    });
+                });
+            });
+            promptOptions()
         });
-        db.query("SELECT * FROM employees", function (err, data) {
-            if (err) throw err;
-            console.table(data)
-        });
-        // 1. how do I grab id and position_id from answers.emplUpdated and updatePosition?!?!?!
-        // 2. how do I return a pristine table like my original table from promptEmpls()?!?!?!
-        promptOptions()
-    });
 }

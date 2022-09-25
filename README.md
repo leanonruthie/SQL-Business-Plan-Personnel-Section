@@ -13,7 +13,6 @@ AS AN aspiring entrepreneur
 I WANT to create a short and succinct table in the personnel section of my business plan that shows the departments and employees I need to run a successful business
 SO THAT I can appeal to many investors reading my business plan
 ```
-
 ## Acceptance Criteria
 
 ```md
@@ -34,8 +33,8 @@ WHEN I choose to "add a position"
 THEN I enter its name, salary, and choose its department and table/database is updated
 WHEN I choose to update employee position information
 THEN I am prompted to select one of the employees and his/her/their new position and table/database is updated
-WHEN I choose any of the BONUS prompts - (1) View employees by Department (2) View employees by Manager (3) Delete Department (4) Delete Employee (5) Delete Position (6) Update Manager Position (7) Sum of Salaries 
-THEN I am able to update respective BONUS information and table/database is updated
+<!-- WHEN I choose any of the BONUS prompts - (1) View employees by Department (2) View employees by Manager (3) Delete Department (4) Delete Employee (5) Delete Position (6) Update Manager Position (7) Sum of Salaries 
+THEN I am able to update respective BONUS information and table/database is updated -->
 ```
 ## Screenshots
 * query.sql not required but useful and remains in db folder for consistent testing/querying
