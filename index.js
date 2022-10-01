@@ -9,6 +9,40 @@ const inquirer = require('inquirer');
 // const { devNull } = require('os');
 const db = require('./db/db');
 
+// Help from tutoring, below "data" returns id, first_name, last_name, position_id, manager_id from employees table DYNAMICALLY for var inside Prompt 5
+let myEmpls = {};
+function pushEmplPromptChoices() {
+    myEmpls = db.query("SELECT * FROM employees", function (err, data) {
+        if (err) throw err;
+        // console.log(data) working but lengthy
+        myEmpls = data
+    });
+}
+pushEmplPromptChoices();
+
+// Help from tutoring, "data" returns id, position_name, salary, department_id, from positions table DYNAMICALLY for var inside Prompt 5
+let myPstns = {};
+function pushPstnPromptChoices() {
+    myPstns = db.query("SELECT * FROM positions", function (err, data) {
+        if (err) throw err;
+        // console.log(data) working but lengthy
+        myPstns = data
+    });
+}
+pushPstnPromptChoices();
+
+// Help from tutoring, "data" returns id, department_name from departments table DYNAMICALLY for var inside Prompt 6
+
+let myDepts = {};
+function pushDeptPromptChoices() {
+    myDepts = db.query("SELECT * FROM departments", function (err, data) {
+        if (err) throw err;
+        // console.log(data)
+        myDepts = data
+    });
+}
+pushDeptPromptChoices();
+
 // initializing inquirer prompt 
 promptOptions()
 
@@ -89,26 +123,14 @@ function promptAddDept() {
             db.query("INSERT INTO departments(department_name) VALUES (?)", answers.deptName, function (err, data) {
                 if (err) throw err;
                 promptDepts(data);
+                pushDeptPromptChoices();
             });
         });
 }
 
-// Help from tutoring, below "data" returns id, first_name, last_name, position_id, manager_id from  employees table dynamically for var inside Prompt 5
-let myEmpls = db.query("SELECT * FROM employees", function (err, data) {
-    if (err) throw err;
-    // console.log(data) working but lengthy
-    myEmpls = data
-});
-
-// Help from tutoring, "data" returns id, position_name, salary, department_id, from  positions table dynamically for var inside Prompt 5
-let myPstns = db.query("SELECT * FROM positions", function (err, data) {
-    if (err) throw err;
-    // console.log(data) working but lengthy
-    myPstns = data
-});
-
 // 5. Add an Employee 
 function promptAddEmpl() {
+
     // from tutoring - .map to grab position_names only
     var newEmplPositions = myPstns.map(element => {
         return `${element.position_name}`
@@ -142,40 +164,32 @@ function promptAddEmpl() {
         },
     ])
         // I learned from tutoring this is called callback hell; callback hell was used here instead of a simple and direct prompt asking for the manager_id and position_id because I already dynamically pushed all options in prompts in full out list; doing this assignment the hard way proved that async/await is crucial and sequelize/express saves a lot of time than verbatim commands in sql
-
         .then((answers) => {
             let managerId = "";
             // to split full name of chosen managers
-            db.query("SELECT id from employees WHERE first_name = ? and last_name = ?", [answers.newEmplMngr.split(" ")[0], answers.newEmplMngr.split(" ")[1]], function (err, data) {
+            db.query("SELECT id FROM employees WHERE first_name = ? and last_name = ?", [answers.newEmplMngr.split(" ")[0], answers.newEmplMngr.split(" ")[1]], function (err, data) {
                 if (err) throw err;
                 console.log(data);
                 managerId = data[0].id;
                 let positionId = "";
-                db.query("SELECT id from positions WHERE position_name = ?", [answers.newEmplPstn], function (err2, data2) {
+                db.query("SELECT id FROM positions WHERE position_name = ?", [answers.newEmplPstn], function (err2, data2) {
                     if (err2) throw err2;
                     console.log(data2);
                     positionId = data2[0].id;
                     db.query("INSERT INTO employees (first_name, last_name, manager_id, position_id) VALUES (?,?,?,?)", [answers.emplFirst, answers.emplLast, managerId, positionId], function (err3, data3) {
                         if (err3) throw err3;
                         console.log(data3);
+                        pushEmplPromptChoices();
                         db.query("SELECT * FROM employees", function (err4, data4) {
                             if (err4) throw err4;
                             console.table(data4)
                         });
                     });
-                })
+                });
             });
             promptOptions()
         });
 };
-
-// Help from tutoring, "data" returns id, department_name from departments table dynamically for var inside Prompt 5
-
-let myDepts = db.query("SELECT * FROM departments", function (err, data) {
-    if (err) throw err;
-    // console.log(data)
-    myDepts = data
-});
 
 // 6. add position 
 function promptAddPosition() {
@@ -201,8 +215,8 @@ function promptAddPosition() {
             message: 'What is salary of the new position?'
         }
     ])
+        // I learned from tutoring this is called callback hell; callback hell was used here instead of a simple and direct prompt asking for the manager_id and position_id because I already dynamically pushed all options in prompts in full out list; doing this assignment the hard way proved that async/await is crucial and sequelize/express saves a lot of time than verbatim commands in sql
         .then((answers) => {
-            console.log(deptNewPosition);
             let deptId = "";
             db.query("SELECT id FROM departments WHERE department_name = ?", [answers.newPositionDept], function (err, data) {
                 if (err) throw err;
@@ -211,6 +225,7 @@ function promptAddPosition() {
                 db.query("INSERT INTO positions (position_name, salary, department_id) VALUES (?,?,?)", [answers.newPosition, answers.newPositionSalary, deptId], function (err2, data2) {
                     if (err2) throw err2;
                     console.log(data2);
+                    pushPstnPromptChoices();
                     db.query("SELECT * FROM positions", function (err3, data3) {
                         if (err3) throw err3;
                         console.table(data3)
@@ -219,7 +234,7 @@ function promptAddPosition() {
             });
             promptOptions()
         });
-}
+};
 
 // 7. update to revise any outdated employee position 
 function promptEmplUpdate() {
@@ -245,21 +260,31 @@ function promptEmplUpdate() {
             choices: newEmplPositions
         },
     ])
+        // I learned from tutoring this is called callback hell; callback hell was used here instead of a simple and direct prompt asking for the manager_id and position_id because I already dynamically pushed all options in prompts in full out list; doing this assignment the hard way proved that async/await is crucial and sequelize/express saves a lot of time than verbatim commands in sql
         .then((answers) => {
-            let positionId = "";
-            db.query("SELECT id from positions WHERE position_name = ?", [answers.updatePosition], function (err, data) {
+            pushEmplPromptChoices();
+            let employeeId = "";
+            // to split full name of chosen employees
+            db.query("SELECT id FROM employees WHERE first_name = ? and last_name = ?", [answers.emplUpdated.split(" ")[0], answers.emplUpdated.split(" ")[1]], function (err, data) {
                 if (err) throw err;
                 console.log(data);
-                positionId = data[0].id;
-                db.query("INSERT INTO employees(first_name, last_name, position_id) VALUES (?,?,?)", [answers.emplFirst, answers.emplLast, positionId], function (err2, data2) {
+                employeeId = data[0].id;
+                let positionId = "";
+                db.query("SELECT id FROM positions WHERE position_name = ?", [answers.updatePosition], function (err2, data2) {
                     if (err2) throw err2;
                     console.log(data2);
-                    db.query("SELECT * FROM employees", function (err, data) {
-                        if (err) throw err;
-                        console.table(data)
+                    positionId = data2[0].id;
+                    db.query("UPDATE employees SET position_id =? WHERE id=?", [positionId, employeeId], function (err3, data3) {
+                        if (err3) throw err3;
+                        console.log(data3);
+                        pushEmplPromptChoices();
+                        db.query("SELECT * FROM employees", function (err4, data4) {
+                            if (err4) throw (err4);
+                            console.table(data4)
+                        });
                     });
                 });
             });
             promptOptions()
         });
-}
+};
