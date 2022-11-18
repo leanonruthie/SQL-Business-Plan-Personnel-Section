@@ -42,7 +42,7 @@ THEN I am able to update respective BONUS information and table/database is upda
  <img src="./Assets/Screen%20Shot%202022-09-15%20at%2010.12.06%20PM%20(2).png">
 
 ## Github Repository
-[My GitHub](https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git">https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git)
+[My GitHub](https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git)
 
 ## Demo
 Please see below video demo of the functioning application:
