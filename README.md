@@ -1,7 +1,7 @@
 # SQL-Business-Plan-Personnel-Section
 
 ## Work References
-* <a href="hhttps://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp">https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp</a>
+* [SQL Tables](https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp">https://www.w3schools.com/nodejs/nodejs_mysql_create_table.asp)
 * Week 10 OOP-Team-Roster Assignment for working prompts(i.e., functioning Inquirer)
 * RUT-VIRT-FSF-PT-06-2022-U-LOLC/12-SQL/01-Activities/ for testing/working mySQL (i.e., schema.sql, query.sql, query.sql)
 * My brilliant study buddies, instructor, TA and tutor for integration
@@ -42,7 +42,7 @@ THEN I am able to update respective BONUS information and table/database is upda
  <img src="./Assets/Screen%20Shot%202022-09-15%20at%2010.12.06%20PM%20(2).png">
 
 ## Github Repository
-<a href="https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git">https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git</a>
+[My GitHub](https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git">https://github.com/leanonruthie/SQL-Business-Plan-Personnel-Section.git)
 
 ## Demo
 Please see below video demo of the functioning application:
